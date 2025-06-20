@@ -1,0 +1,55 @@
+{
+  "name": "posts-manager",
+  "version": "1.0.0",
+  "description": "Challenge Técnico Posts Manager con Clean Architecture",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run backend:dev\" \"npm run frontend:dev\" --names \"BACKEND,FRONTEND\" --prefix-colors \"blue,green\" --kill-others",
+    "start": "concurrently \"npm run backend:start\" \"npm run frontend:preview\" --names \"BACKEND,FRONTEND\" --prefix-colors \"blue,green\" --kill-others",
+    "build": "npm run backend:build && npm run frontend:build",
+    "test": "concurrently \"npm run backend:test\" \"npm run frontend:test\" --names \"BACKEND,FRONTEND\" --prefix-colors \"blue,green\"",
+    "setup": "npm install && npm run backend:install && npm run frontend:install",
+    "backend:install": "cd backend && npm install",
+    "frontend:install": "cd frontend && npm install",
+    "backend:dev": "cd backend && npm run migrate && npm run dev",
+    "frontend:dev": "cd frontend && npm run dev",
+    "backend:build": "cd backend && npm run build",
+    "frontend:build": "cd frontend && npm run build", 
+    "backend:start": "cd backend && npm run build && npm run start",
+    "frontend:preview": "cd frontend && npm run build && npm run preview",
+    "backend:test": "cd backend && npm run test",
+    "frontend:test": "cd frontend && npm run test",
+    "backend:migrate": "cd backend && npm run migrate",
+    "lint": "concurrently \"npm run backend:lint\" \"npm run frontend:lint\" --names \"BACKEND,FRONTEND\" --prefix-colors \"blue,green\"",
+    "backend:lint": "cd backend && npm run lint",
+    "frontend:lint": "cd frontend && npm run lint",
+    "type-check": "concurrently \"npm run backend:type-check\" \"npm run frontend:type-check\" --names \"BACKEND,FRONTEND\" --prefix-colors \"blue,green\"",
+    "backend:type-check": "cd backend && npm run type-check",
+    "frontend:type-check": "cd frontend && npm run type-check",
+    "clean": "rimraf backend/node_modules frontend/node_modules backend/dist frontend/dist node_modules",
+    "fresh-install": "npm run clean && npm run setup",
+    "health": "curl http://localhost:3001/health && echo '\\n✅ Backend funcionando' || echo '❌ Backend no responde'"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "rimraf": "^5.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "."
+  },
+  "keywords": [
+    "clean-architecture",
+    "solid-principles",
+    "react",
+    "nodejs",
+    "typescript",
+    "challenge-tecnico"
+  ],
+  "author": "Desarrollador TCIT",
+  "license": "MIT"
+} 
