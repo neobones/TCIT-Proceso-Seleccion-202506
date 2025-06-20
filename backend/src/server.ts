@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import { createPostRoutes } from './frameworks-drivers/web/routes/postRoutes';
+import { createAuditRoutes } from './frameworks-drivers/web/routes/auditRoutes';
 import { errorHandler } from './frameworks-drivers/web/middleware/errorHandler';
 import { migrate } from './frameworks-drivers/database/migrate';
 
@@ -77,7 +78,10 @@ async function startServer(): Promise<void> {
     // Configurar rutas
     console.log('🔄 Configurando rutas...');
     const postRoutes = await createPostRoutes();
+    const auditRoutes = await createAuditRoutes();
+    
     app.use('/api/posts', postRoutes);
+    app.use('/api/audit', auditRoutes);
 
     // Middleware de manejo de errores (debe ir al final)
     app.use(errorHandler);

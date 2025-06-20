@@ -2,16 +2,14 @@ import { Post, CreatePostRequest, PostApiResponse } from '@domain/entities/Post'
 import { PostRepository } from '@domain/repositories/PostRepository';
 import { ApiError, NetworkError, NotFoundError } from '@shared/errors/DomainErrors';
 import { Logger } from '@shared/utils/logger';
-import { HttpClient } from '@frameworks-drivers/http/HttpClient';
+import { httpClient } from '@frameworks-drivers/http/HttpClient';
 
 export class ApiPostRepository implements PostRepository {
-  constructor(private readonly httpClient: HttpClient) {}
-
   async save(request: CreatePostRequest): Promise<Post> {
     try {
       Logger.debug('Creando post', request);
       
-      const response = await this.httpClient.post<PostApiResponse>('/api/posts', request);
+      const response = await httpClient.post<PostApiResponse>('/posts', request);
       
       Logger.debug('Post creado exitosamente', response);
       return Post.fromApiResponse(response);
@@ -25,7 +23,7 @@ export class ApiPostRepository implements PostRepository {
     try {
       Logger.debug('Eliminando post', { id });
       
-      const response = await this.httpClient.delete<PostApiResponse>(`/api/posts/${id}`);
+      const response = await httpClient.delete<PostApiResponse>(`/posts/${id}`);
       
       Logger.debug('Post eliminado exitosamente', response);
       return Post.fromApiResponse(response);
@@ -39,7 +37,7 @@ export class ApiPostRepository implements PostRepository {
     try {
       Logger.debug('Obteniendo todos los posts');
       
-      const response = await this.httpClient.get<PostApiResponse[]>('/api/posts');
+      const response = await httpClient.get<PostApiResponse[]>('/posts');
       
       Logger.debug('Posts obtenidos exitosamente', { count: response.length });
       return response.map(postData => Post.fromApiResponse(postData));

@@ -83,4 +83,41 @@ export class HttpClient {
     const response = await this.axiosInstance.patch<T>(url, data, config);
     return response.data;
   }
+}
+
+// Crear instancia global del cliente HTTP
+const getApiUrl = (): string => {
+  // Detección inteligente del entorno
+  const envUrl = import.meta.env.VITE_API_BASE_URL;
+  
+  // Si hay una URL explícita, usarla
+  if (envUrl && envUrl !== '') {
+    return `${envUrl}/api`;
+  }
+  
+  // Auto-detección basada en la URL actual
+  if (typeof window !== 'undefined') {
+    const { protocol, hostname } = window.location;
+    
+    // Si estamos en localhost (Docker o desarrollo), usar localhost:3001
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      return `${protocol}//localhost:3001/api`;
+    }
+    
+    // Si estamos en otra IP, asumir que el backend está en el mismo host
+    return `${protocol}//${hostname}:3001/api`;
+  }
+  
+  // Fallback para SSR o casos especiales
+  return 'http://localhost:3001/api';
+};
+
+export const httpClient = new HttpClient({
+  baseURL: getApiUrl(),
+  timeout: 10000,
+});
+
+// Log de configuración para debugging
+if (typeof window !== 'undefined') {
+  console.log('🔗 API Base URL configurada:', getApiUrl());
 } 

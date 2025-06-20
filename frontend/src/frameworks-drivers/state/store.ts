@@ -1,50 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import postReducer from '@interface-adapters/state/postSlice';
+import auditReducer from '@interface-adapters/state/auditSlice';
 import { CreatePostUseCase } from '@use-cases/CreatePost';
 import { DeletePostUseCase } from '@use-cases/DeletePost';
 import { ListPostsUseCase } from '@use-cases/ListPosts';
 import { FilterPostsUseCase } from '@use-cases/FilterPosts';
 import { ApiPostRepository } from '@interface-adapters/repositories/ApiPostRepository';
-import { HttpClient } from '@frameworks-drivers/http/HttpClient';
 
-// Dependency injection setup
-const getApiBaseUrl = (): string => {
-  // Detección inteligente del entorno
-  const envUrl = import.meta.env.VITE_API_BASE_URL;
-  
-  // Si hay una URL explícita, usarla
-  if (envUrl && envUrl !== '') {
-    return envUrl;
-  }
-  
-  // Auto-detección basada en la URL actual
-  if (typeof window !== 'undefined') {
-    const { protocol, hostname } = window.location;
-    
-    // Si estamos en localhost (Docker o desarrollo), usar localhost:3001
-    if (hostname === 'localhost' || hostname === '127.0.0.1') {
-      return `${protocol}//localhost:3001`;
-    }
-    
-    // Si estamos en otra IP, asumir que el backend está en el mismo host
-    return `${protocol}//${hostname}:3001`;
-  }
-  
-  // Fallback para SSR o casos especiales
-  return 'http://localhost:3001';
-};
+// Use cases para dependency injection
+const postRepository = new ApiPostRepository();
 
-const apiBaseUrl = getApiBaseUrl();
-console.log('🔗 API Base URL configurada:', apiBaseUrl);
-
-const httpClient = new HttpClient({
-  baseURL: apiBaseUrl,
-  timeout: 10000,
-});
-
-const postRepository = new ApiPostRepository(httpClient);
-
-// Use cases
 const useCases = {
   createPostUseCase: new CreatePostUseCase(postRepository),
   deletePostUseCase: new DeletePostUseCase(postRepository),
@@ -55,6 +20,7 @@ const useCases = {
 export const store = configureStore({
   reducer: {
     posts: postReducer,
+    audit: auditReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -67,11 +33,15 @@ export const store = configureStore({
           'posts/fetchPosts/fulfilled',
           'posts/createPost/fulfilled',
           'posts/deletePost/fulfilled',
+          'audit/fetchLogs/fulfilled',
+          'audit/fetchStats/fulfilled',
         ],
         // Ignorar estos paths en el estado porque contienen fechas
         ignoredPaths: [
           'posts.posts',
           'posts.filteredPosts',
+          'audit.logs',
+          'audit.stats',
         ],
       },
     }),
