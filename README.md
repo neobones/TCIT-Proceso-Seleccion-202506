@@ -1,6 +1,8 @@
 # Posts Manager - Clean Architecture Implementation
 
-## 🏗️ Arquitectura
+> 📚 **Documentación Completa:** Para una documentación interactiva y detallada del proyecto, visita la **[Wiki del Proyecto](https://deepwiki.com/neobones/TCIT-Proceso-Seleccion-202506)** generada automáticamente desde el repositorio.
+
+## Arquitectura
 
 Este proyecto implementa Clean Architecture con principios SOLID para demostrar mejores prácticas en desarrollo full-stack.
 
@@ -325,20 +327,55 @@ Esta arquitectura permite:
 - **Nuevas UIs**: Web, mobile, desktop usando los mismos casos de uso
 - **Nuevas BDs**: Solo cambiar la implementación del repositorio
 
+## 📖 Documentación Adicional
+
+### 🌐 Wiki Interactiva del Proyecto
+Este proyecto cuenta con una **wiki completa y actualizada automáticamente** que proporciona:
+
+- **Análisis detallado del código**: Exploración interactiva de cada archivo y función
+- **Diagramas de arquitectura**: Visualización gráfica de las dependencias y relaciones
+- **Documentación de APIs**: Especificaciones completas de todos los endpoints
+- **Historial de cambios**: Tracking completo de la evolución del proyecto
+- **Guías de implementación**: Explicaciones paso a paso de patrones y técnicas utilizadas
+
+#### 🔗 Accede a la Wiki
+**[👉 DeepWiki - TCIT Proceso Selección 202506](https://deepwiki.com/neobones/TCIT-Proceso-Seleccion-202506)**
+
+> 💡 **Tip:** La wiki se actualiza automáticamente con cada commit, por lo que siempre refleja el estado actual del código.
+
+### 📋 Recursos de Documentación
+
+| Recurso | Descripción | Link |
+|---------|-------------|------|
+| 📖 README Principal | Documentación básica y setup | `Este archivo` |
+| 🌐 Wiki Interactiva | Documentación completa y navegable | [DeepWiki](https://deepwiki.com/neobones/TCIT-Proceso-Seleccion-202506) |
+| 🔍 Código Fuente | Exploración directa del código | [GitHub Repository](.) |
+| Arquitectura | Diagramas y patrones implementados | Ver wiki interactiva |
+
 ## 👥 Contribución
 
 Para contribuir al proyecto:
 
-1. Fork el repositorio
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
+1. **Explora la documentación**: Revisa la [Wiki del Proyecto](https://deepwiki.com/neobones/TCIT-Proceso-Seleccion-202506) para entender la arquitectura completa
+2. Fork el repositorio
+3. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+4. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+5. Push a la rama (`git push origin feature/AmazingFeature`)
+6. Abre un Pull Request
+
+> 📚 **Antes de contribuir:** Te recomendamos revisar la wiki interactiva para comprender mejor los patrones de diseño y la estructura del código.
 
 ## 📄 Licencia
 
 Este proyecto está bajo la licencia MIT. Ver `LICENSE` para más detalles.
 
 ---
+
+## 🔗 Enlaces Útiles
+
+- 🌐 **[Wiki Interactiva del Proyecto](https://deepwiki.com/neobones/TCIT-Proceso-Seleccion-202506)** - Documentación completa y navegable
+- 📁 **[Repositorio GitHub](https://github.com/neobones/TCIT-Proceso-Seleccion-202506)** - Código fuente
+- 🏗️ **Clean Architecture** - Principios y patrones implementados
+- 🎯 **SOLID Principles** - Fundamentos de diseño aplicados
 
 **Desarrollado con ❤️ siguiendo principios de Clean Architecture y SOLID**
